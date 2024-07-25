@@ -1,36 +1,54 @@
-const prompt = require("prompt-sync")();
-const { criar, listagem } = require("./main.js");
 
-while (true) {
-    console.log(`
-          1 - Inserir país
-          2 - Listar países
-          3 - Atualizar
-          4- Sair
-          `);
+const lerIndice = (mensagem) => parseInt(prompt(mensagem));
+
+const nomeInvalido = (nome) => nome == "";
+
+const indiceInvalido = (indice) =>
+  indice < 0 || indice >= jogos.length || isNaN(indice);
+
+const paises = [
+    {
+        nome: "Paraguai",
+    },
+    {
+        nome: "Brasil"
+    }
+]
+
+const regioes = [{
+    nome: "Sul"
+}]
+
+const estados = [{
+    nome: "Paraná",
+    uf: "PR",
+    regiao: 0,
+    pais: 1,
+}]
+
+const cidades = [{
+    nome: "Ponta Grossa"
+}]
+
+const remover = () => {
+    while (true) {
+      const indice =
+        lerIndice("Qual é o indice do jogo que deseja remover? ") - 1;
   
-    const opcao = +prompt("Qual opção deseja?");
-
-switch (opcao) {
-    case 1:
-        criar()
+      if (indiceInvalido(indice)) {
+        console.log("Indice inválido");
+      } else {
+        jogos.splice(indice, 1);
+        console.log("Removido com sucesso");
         break;
+      }
+    }
+  };
 
-    case 2:
-        listagem()
-        break;
+estados.forEach(estado => {
+    console.log(paises[estado.pais])
+})
 
-    case 3:
-        
-    break;
-        
-    case 4:
-        process.exit()
-        
-        break;
-
-    default:
-        console.log("Opção inválida")
-        break;
-}
+modules.exports = {
+    paises, regioes, estados, cidades
 }
